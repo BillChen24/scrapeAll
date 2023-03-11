@@ -26,8 +26,10 @@ def load_files(filepath):
             df_ls.append(df)
     return df_ls
 
-def output(lst, path):
+def store_dfs(lst, path):
     df_first = pd.concat(lst)
     df_result = df_first.reset_index(drop = True)
-    df_result.to_csv(os.path.join(path, 'jyhq_prov_data.csv'),index = False)
-    return df_result
+    output_path = os.path.join(path, 'jyhq_prov_data.csv')
+    df_result.to_csv(output_path,index = False)
+    print("Data successfully store at " + output_path)
+    return
