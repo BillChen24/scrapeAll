@@ -23,7 +23,7 @@ def main():
         output_path = input_path.replace('raw', 'clean')
     print(input_path)
     print(output_path)
-    data_type = input('What type of data?\n')
+    data_type = input('What type of data? image/pdf/table \n')
 
     if data_type == 'json':
         data_name = input("Guangdong prov month JYHQ? (Y/N)\n")
@@ -67,6 +67,11 @@ def main():
         store_clean(tables, output_path)
         #extract text from images
         save_text_from_image(temp_path, output_path)
+
+    if data_type == 'table':
+        all_tables = get_tables_from_excels(input_path)
+        tables = split_tables(all_tables)
+        store_clean(tables, output_path)
 
 
 
