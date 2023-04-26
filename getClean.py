@@ -25,20 +25,20 @@ def main():
     print(output_path)
     data_type = input('What type of data? image/pdf/table \n')
 
-    if data_type == 'json':
-        data_name = input("Guangdong prov month JYHQ? (Y/N)\n")
-        if data_name == 'Y':
-            #load all json files from input path
-            df_ls = load_files(input_path)
-            #make new folder if output path does not exist
-            if not os.path.exists(output_path):
-                os.mkdir(output_path)
-            #store cleaned data
-            store_dfs(df_ls, output_path)
-            return
-        else:
-            print("No other data availble.")
-            return
+    # if data_type == 'json':
+    #     data_name = input("Guangdong prov month JYHQ? (Y/N)\n")
+    #     if data_name == 'Y':
+    #         #load all json files from input path
+    #         df_ls = load_files(input_path)
+    #         #make new folder if output path does not exist
+    #         if not os.path.exists(output_path):
+    #             os.mkdir(output_path)
+    #         #store cleaned data
+    #         store_dfs(df_ls, output_path)
+    #         return
+    #     else:
+    #         print("No other data availble.")
+    #         return
 
     if data_type == 'image':
         head, tail = os.path.split(input_path)
