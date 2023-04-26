@@ -28,7 +28,7 @@ Consists of two part:
 > 2. ```python getRaw.py data/raw/2017年5月份中国电煤价格指数/```
 > 3. paste ```https://www.cctd.com.cn/show-46-167312-1.html```
 > 4. type ```table```
-
+---
 ### Image
 *Required Packages:*
 - [PIL](https://pillow.readthedocs.io/en/stable/)
@@ -49,6 +49,8 @@ Consists of two part:
 > 3. paste ```https://zhuanlan.zhihu.com/p/124225606```
 > 4. type ```image```
 > 5. type ```50000```
+
+---
 ### Pdf (PMOS only)
 *Required Packages:*
 - [selenium](https://pypi.org/project/selenium/)
@@ -73,6 +75,7 @@ Consists of two part:
 > 6. type 3
 > 7. type 工作日报
 
+<br />
 
 ## Clean Raw Data
 *Required Packages:*
@@ -83,7 +86,7 @@ For image extraction:
 - [pdf2image](https://pypi.org/project/pdf2image/)
 - From the above website, download the poppler for your laptop.
 - Go to src/getClean/pdf_to_image.py and change the variable at line 10 to your poppler bin path
-
+---
 ### Extract Tables from PDF
 *How to use:*
 > 1. open command prompt and cd to the folder that contains getClean.py.
@@ -98,7 +101,7 @@ For image extraction:
 > 2. ```python getClean.py data/raw/Shandong_PMOS/山东电力现货市场2023年4月结算试运行工作日报(4月7日).pdf```
 > 3. type ```pdf```
 > 4. All tables would be stored at data/clean/Shandong_PMOS/山东电力现货市场2023年4月结算试运行工作日报(4月7日)/
-
+---
 
 ### Extract Tables from Images
 *How to use:*
@@ -112,4 +115,4 @@ For image extraction:
 > 1. open command prompt and cd to the folder that contains getClean.py.
 > 2. ```python getClean.py data/raw/website_images/```
 > 3. type ```image```
-> > 4. All tables would be stored at data/clean/website_images/
+> 4. All tables would be stored at data/clean/website_images/
