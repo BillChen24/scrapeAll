@@ -42,7 +42,7 @@ Consists of two part:
 > 5. type the threshold of the size of the image to download. (eg. to download images larger than 25kb type 25000)  
 <br />
 
-*Example:*\
+*Example:*
 [This is a website that contains images](https://zhuanlan.zhihu.com/p/124225606)
 > 1. open command prompt and cd to the folder that contains getRaw.py.
 > 2. ```python getRaw.py data/raw/关于2020年2月广东电力市场结算情况的通告/```
@@ -63,7 +63,7 @@ Consists of two part:
 > 7. type the search keyword. (press enter to accept default value None) (by giving a search keyword, you will only download pdf that contains such keyword.)
 <br />
 
-*Example:*\
+*Example:*
 [This is a PMOS website](https://pmos.sd.sgcc.com.cn/pxf-settlement-outnetpub/#/pxf-settlement-outnetpub/columnHomeLeftMenuNew)
 > 1. open command prompt and cd to the folder that contains getRaw.py.
 > 2. ```python getRaw.py data/raw/Shandong_PMOS/```
@@ -93,7 +93,7 @@ For image extraction:
 > 3. type ```pdf```
 <br />
 
-*Example:*\
+*Example:*
 > 1. open command prompt and cd to the folder that contains getClean.py.
 > 2. ```python getClean.py data/raw/Shandong_PMOS/山东电力现货市场2023年4月结算试运行工作日报(4月7日).pdf```
 > 3. type ```pdf```
@@ -108,7 +108,7 @@ For image extraction:
 > 3. type ```image```
 <br />
 
-*Example:*\
+*Example:*
 > 1. open command prompt and cd to the folder that contains getClean.py.
 > 2. ```python getClean.py data/raw/website_images/```
 > 3. type ```image```
