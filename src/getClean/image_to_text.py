@@ -10,6 +10,7 @@ from PIL import Image
 import pytesseract
 import os
 
+#Change the following line to your tesseract path
 pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
 
 def process_image(iamge_name, lang_code):

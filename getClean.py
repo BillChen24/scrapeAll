@@ -57,7 +57,6 @@ def main():
     if data_type == 'pdf':
         head, tail = os.path.split(input_path)
         temp_path = os.path.join(os.path.dirname(input_path), tail + '_temp/')
-        print(temp_path)
         #store pdf as image in temp folder
         save_image_from_pdf(input_path, temp_path)
         #extract and split tables from images
