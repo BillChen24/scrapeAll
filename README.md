@@ -51,10 +51,58 @@ Consists of two part:
 > 4. type ```image```
 > 5. type ```50000```
 ### Pdf (PMOS only)
+*Required Packages:*
+- [selenium](https://pypi.org/project/selenium/)
+
+*How to use:*
+> 1. open command prompt and cd to the folder that contains getRaw.py.
+> 2. ```python getRaw.py {the folder that you want to store the image}```
+> 3. paste or type the pmos url
+> 4. type ```pdf```
+> 5. type the html class of the pdf element. (press enter to accept default value ```el-table__row```)
+> 6. type the number of page you want to scrape. (press enter to accept default value 1)
+> 7. type the search keyword. (press enter to accept default value None) (by giving a search keyword, you will only download pdf that contains such keyword.)
+<br />
+
+*Example:*\
+[This is a PMOS website](https://pmos.sd.sgcc.com.cn/pxf-settlement-outnetpub/#/pxf-settlement-outnetpub/columnHomeLeftMenuNew)
+> 1. open command prompt and cd to the folder that contains getRaw.py.
+> 2. ```python getRaw.py data/Shandong_PMOS/```
+> 3. paste ```(https://pmos.sd.sgcc.com.cn/pxf-settlement-outnetpub/#/pxf-settlement-outnetpub/columnHomeLeftMenuNew)```
+> 4. type ```pdf```
+> 5. press enter
+> 6. type 3
+> 7. type 工作日报
+
 
 ## Clean Raw Data
-### Extract Images
+### Extract Images from PDF
+*Required Packages:*
+- [pdf2image](https://pypi.org/project/pdf2image/)
+- From the above website, download the poppler for your laptop.
+- Go to src/getClean/pdf_to_image.py and change the variable at line 10 to your poppler bin path
 
 
-### Extract Tables
+*How to use:*
+> 1. open command prompt and cd to the folder that contains getClean.py.
+> 2. ```python getRaw.py {the folder that you want to store the image}```
+> 3. paste or type the pmos url
+> 4. type ```pdf```
+> 5. type the html class of the pdf element. (press enter to accept default value ```el-table__row```)
+> 6. type the number of page you want to scrape. (press enter to accept default value 1)
+> 7. type the search keyword. (press enter to accept default value None) (by giving a search keyword, you will only download pdf that contains such keyword.)
+<br />
+
+*Example:*\
+[This is a PMOS website](https://pmos.sd.sgcc.com.cn/pxf-settlement-outnetpub/#/pxf-settlement-outnetpub/columnHomeLeftMenuNew)
+> 1. open command prompt and cd to the folder that contains getRaw.py.
+> 2. ```python getRaw.py data/Shandong_PMOS/```
+> 3. paste ```(https://pmos.sd.sgcc.com.cn/pxf-settlement-outnetpub/#/pxf-settlement-outnetpub/columnHomeLeftMenuNew)```
+> 4. type ```pdf```
+> 5. press enter
+> 6. type 3
+> 7. type 工作日报
+
+### Extract Tables from Image
+
 ### Combine and Split Tables
