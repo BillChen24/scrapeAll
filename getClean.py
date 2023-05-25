@@ -16,13 +16,21 @@ def main():
     input_path = sys.argv[1]
     current = os.getcwd()
     input_path = os.path.join(current, input_path)
+    print("input path at: "+input_path)
 
     try:
         output_path = sys.argv[2]
     except:
-        output_path = input_path.replace('raw', 'clean')
-    print(input_path)
-    print(output_path)
+        if os.path.isdir(input_path):
+            if 'raw' in input_path:
+                output_path = input_path.replace('raw', 'clean')
+            else:
+                output_path = input_path
+        elif os.path.isfile(input_path):
+            if 'raw' in input_path:
+                output_path = os.path.dirname(input_path).replace('raw', 'clean')
+            else:
+                output_path = os.path.dirname(input_path)
     data_type = input('What type of data? image/pdf/table \n')
 
     # if data_type == 'json':
@@ -55,17 +63,39 @@ def main():
         ...
 
     if data_type == 'pdf':
-        head, tail = os.path.split(input_path)
-        temp_path = os.path.join(os.path.dirname(input_path), tail + '_temp/')
-        #store pdf as image in temp folder
-        save_image_from_pdf(input_path, temp_path)
-        #extract and split tables from images
-        convert_all_images(temp_path, temp_path)
-        all_tables = get_tables_from_excels(temp_path)
-        tables = split_tables(all_tables)
-        store_clean(tables, output_path)
-        #extract text from images
-        save_text_from_image(temp_path, output_path)
+        #if input path is one pdf:
+        if os.path.isfile(input_path):
+            head, tail = os.path.split(input_path)
+            file_name = tail.split('.')[0]
+            temp_path = os.path.join(os.path.dirname(input_path), 'temp_' + file_name)
+            if output_path == os.path.dirname(input_path):
+                output_path = os.path.join(output_path, 'clean_' + file_name)
+            #store pdf as image in temp folder
+            save_image_from_pdf(input_path, temp_path)
+            #extract and split tables from images
+            convert_all_images(temp_path, temp_path)
+            all_tables = get_tables_from_excels(temp_path)
+            tables = split_tables(all_tables)
+            store_clean(tables, output_path)
+            #extract text from images
+            save_text_from_image(temp_path, output_path)
+        #if input path is a folder
+        elif os.path.isdir(input_path):
+            for item in os.listdir(input_path):
+                file_name = item.split('.')[0]
+                file_path = os.path.join(input_path, item)
+                temp_path = os.path.join(input_path, 'temp_' + file_name)
+                output_path = os.path.join(input_path, 'clean_' + file_name)
+                #store pdf as image in temp folder
+                save_image_from_pdf(file_path, temp_path)
+                #extract and split tables from images
+                convert_all_images(temp_path, temp_path)
+                all_tables = get_tables_from_excels(temp_path)
+                tables = split_tables(all_tables)
+                store_clean(tables, output_path)
+                #extract text from images
+                save_text_from_image(temp_path, output_path)
+
 
     if data_type == 'table':
         all_tables = get_tables_from_excels(input_path)

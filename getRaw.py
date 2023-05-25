@@ -11,6 +11,8 @@ def main():
         output_path = sys.argv[1]
         current = os.getcwd()
         output_path = os.path.join(current, output_path)
+        if not os.path.exists(output_path):
+            os.makedirs(output_path)
     except:
         #no output path provided
         output_path = os.getcwd()
@@ -38,8 +40,8 @@ def main():
         else:
             page_num = int(page_num)
         search_word = input('Enter the search keyword (default None):\n')
-        pdfs = get_pdf_links_more_pages(url=url, element_class=element_class, page_num=page_num, search_word=search_word)
-        save_pdf(pdfs, folder_path = output_path)
+        get_pdf_links_more_pages(url=url, element_class=element_class, page_num=page_num, search_word=search_word, pdf_dict_file= 'pdf_link.json', output_path = output_path)
+        save_pdf(pdf_dict_file = os.path.join(output_path, 'pdf_link.json'), folder_path = output_path)
         #python getRaw.py data/Test/pmos_pdfs/
 # Enter the url:
 # https://pmos.sd.sgcc.com.cn/pxf-settlement-outnetpub/#/pxf-settlement-outnetpub/columnHomeLeftMenuNew

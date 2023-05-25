@@ -13,8 +13,7 @@ import base64
 
 pmos_element_class = 'el-table__row'
 
-def get_pdf_links_one_page(url, element_class = pmos_element_class, driver = None, button_xpath = None, pdf_dict = {}, search_word = None):
-    #print('get_pdf_links_one_page is called.')
+def get_pdf_links_one_page(url, element_class=pmos_element_class, driver=None, button_xpath=None, pdf_dict={}, search_word=None, pdf_dict_file='pdf_link.json', output_path = None):
     if driver is None:
         driver = webdriver.Chrome()
 
@@ -22,101 +21,122 @@ def get_pdf_links_one_page(url, element_class = pmos_element_class, driver = Non
         print(url)
         driver.get(url)
 
-    # wait till elements show up
+    if output_path is None:
+        output_path = os.curdir
+
+    pdf_dict_file = os.path.join(output_path, pdf_dict_file)
+
     WebDriverWait(driver, 60).until(EC.presence_of_element_located((By.CLASS_NAME, element_class)))
-    #time.sleep(10)
 
-    # Find all elements with a specific class name
     elements = driver.find_elements(By.CLASS_NAME, element_class)
-    #print(elements)
 
-    # Loop through each element
+    existing_elements = set()
+    try:
+        with open(pdf_dict_file, 'r', encoding = 'utf8') as f:
+            existing_pdf_dict = json.load(f)
+            existing_elements = set(existing_pdf_dict.keys())
+    except FileNotFoundError:
+        existing_pdf_dict = {}
+        pass
+
     for element in elements:
-        # Click on the element
         pdf_name = element.find_element(By.TAG_NAME, 'span').text
-        if not search_word is None and search_word not in pdf_name: #skip elements that don't contain keyword
+        if pdf_name in existing_elements:
+            print(f"Skipping element '{pdf_name}' (already exists in pdf_link.json)")
             continue
-        if len(pdf_name) < 3: #skip 热点信息
+        if not search_word is None and search_word not in pdf_name:
             continue
-        #print(pdf_name)
+        if len(pdf_name) < 3:
+            continue
+
         try:
-            element.find_element(By.TAG_NAME, 'span').click() #click on element
+            element.find_element(By.TAG_NAME, 'span').click()
         except WebDriverException:
             print(pdf_name + " is not clickable")
             continue
-        time.sleep(5)  # wait for page to load
-        #WebDriverWait(driver, 60).until(EC.presence_of_element_located((By.XPATH, button_xpath)))
+
+        time.sleep(5)
+
         if button_xpath is None:
-            #if button_xpath not provided, click the last button
             pdf_button = driver.find_elements(By.TAG_NAME, 'button')[-1]
         else:
             pdf_button = driver.find_element(By.XPATH, button_xpath)
+
         try:
-            #WebDriverWait(driver, 10).until(EC.element_to_be_clickable(pdf_button))
             pdf_button.click()
         except WebDriverException:
-            # no pdf link, save screenshot instead
             try:
                 img = driver.find_elements(By.TAG_NAME, 'div')[-3].screenshot_as_base64
                 pdf_link = base64.decodebytes(img.encode('utf-8'))
-                print(pdf_name+' has screenshot saved')
+                print(pdf_name + ' has screenshot saved')
             except WebDriverException:
-                # if cannot screenshot, skip
                 pdf_link = None
-                print(pdf_nam + 'has no Link and cannot screenshot')
-            pdf_dict[pdf_name] = pdf_link
-            #close popup
+                print(pdf_name + ' has no Link and cannot screenshot')
+            existing_pdf_dict.update({pdf_name: pdf_link})
+
             try:
                 driver.find_elements(By.CSS_SELECTOR, "[aria-label=Close]")[1].find_element(By.TAG_NAME, 'i').click()
                 time.sleep(3)
             except:
                 ...
-                #print(pdf_name)
-            continue
-        time.sleep(5)
-        #print(driver.current_url)
 
-        #if pdf link exsits, save link and close tab
+            continue
+
+        time.sleep(5)
         driver.switch_to.window(driver.window_handles[-1])
         pdf_link = driver.current_url
         driver.close()
+
         try:
             driver.switch_to.window(driver.window_handles[0])
         except:
             ...
 
-        #close popup
         time.sleep(5)
         driver.find_elements(By.CSS_SELECTOR, "[aria-label=Close]")[1].find_element(By.TAG_NAME, 'i').click()
         time.sleep(3)
-        pdf_dict[pdf_name] = pdf_link
-    return pdf_dict, driver
+        existing_pdf_dict.update({pdf_name: pdf_link})
 
-def get_pdf_links_more_pages(url, element_class = pmos_element_class, driver = None, page_num = 1, pdf_dict = {}, search_word = None):
-    '''
-    get pdf links from url
-    returns a dictionary contains all pdf links
-    '''
-    #print('get_pdf_links_more_pages is called.')
-    # if page_num == 1:
-    #     pdf_dict, driver = get_pdf_links_one_page(url, element_class, driver = driver, pdf_dict = pdf_dict, search_word=search_word)
-    #     return pdf_dict
+        # Save pdf_dict after processing each element
+        save_interval = 1
+        if len(pdf_dict) % save_interval == 0:
+            save_pdf_dict(existing_pdf_dict, pdf_dict_file, output_path)
+
+    return driver
+
+
+def save_pdf_dict(pdf_dict, pdf_dict_file, output_path):
+    if output_path is None:
+        output_path = os.path.curdir
+
+    if pdf_dict_file is None:
+        pdf_dict_file = 'pdf_link.json'
+    pdf_dict_file = os.path.join(output_path, pdf_dict_file)
+    with open(pdf_dict_file, 'w', encoding='utf8') as f:
+        json.dump(pdf_dict, f, ensure_ascii=False)
+
+
+def get_pdf_links_more_pages(url, element_class=pmos_element_class, driver=None, page_num=1, search_word=None, pdf_dict_file=None, output_path = None):
     for _ in range(page_num):
-        pdf_dict, driver = get_pdf_links_one_page(url, element_class, driver = driver, pdf_dict = pdf_dict, search_word=search_word)
+        driver = get_pdf_links_one_page(url, element_class, driver=driver, search_word=search_word, pdf_dict_file=pdf_dict_file, output_path = output_path)
         if driver.find_element(By.CLASS_NAME, 'btn-next').is_enabled():
             driver.find_element(By.CLASS_NAME, 'btn-next').click()
             time.sleep(5)
-    return pdf_dict
+    driver.close()
+    print("All done!")
 
-def save_pdf(pdf_dict, folder_path = None):
-    """
-    save all pdfs to path
-    """
+def save_pdf(pdf_dict_file = 'pdf_link.json', folder_path = None):
     if folder_path is None:
         folder_path = os.curdir
     if not os.path.exists(folder_path):
         os.makedirs(folder_path)
+    with open(pdf_dict_file, 'r', encoding = 'utf8') as f:
+        pdf_dict = json.load(f)
+
+    dir_list = os.listdir(folder_path)
     for k, v in pdf_dict.items():
+        if k in dir_list:
+            continue
         if v is None:
             continue
         if type(v) == str:
@@ -131,6 +151,7 @@ def save_pdf(pdf_dict, folder_path = None):
                 file.write(v)
                 #file.write(base64.decodebytes(v))
                 print('save at '+path)
+
 
 # pmos_url = "https://pmos.sd.sgcc.com.cn/pxf-settlement-outnetpub/#/pxf-settlement-outnetpub/columnHomeLeftMenuNew"
 # element_class = 'el-table__row'
