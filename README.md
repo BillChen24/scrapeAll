@@ -1,11 +1,14 @@
 # scrapeAll
 Overarching pipeline for scraping and cleaning web data
 Consists of two part:
-1. Collect raw data from website:
+
+**1. Collect raw data from website:**
   - HTML Table
   - Image
   - Pdf (PMOS websites only)
-2. Clean raw data:
+
+
+**2. Clean raw data:**
   - Extract tables from pdf
   - Extract tables from images
 
