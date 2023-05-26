@@ -31,6 +31,9 @@ Consists of two part:
 > 2. ```python getRaw.py data/raw/2017年5月份中国电煤价格指数/```
 > 3. paste ```https://www.cctd.com.cn/show-46-167312-1.html```
 > 4. type ```table```
+
+![alt text](Image/url_table.png)
+
 ---
 ### Image
 *Required Packages:*
@@ -53,6 +56,8 @@ Consists of two part:
 > 4. type ```image```
 > 5. type ```25000```
 
+
+![alt text](Image/url_image.png)
 ---
 ### Pdf (PMOS only)
 *Required Packages:*
@@ -77,6 +82,8 @@ Consists of two part:
 > 5. press enter
 > 6. type 3
 > 7. type 工作日报
+
+![alt text](Image/url_pmos.png)
 
 <br />
 
