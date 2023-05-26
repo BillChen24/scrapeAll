@@ -51,7 +51,7 @@ Consists of two part:
 > 2. ```python getRaw.py data/raw/关于2020年2月广东电力市场结算情况的通告/```
 > 3. paste ```https://zhuanlan.zhihu.com/p/124225606```
 > 4. type ```image```
-> 5. type ```50000```
+> 5. type ```25000```
 
 ---
 ### Pdf (PMOS only)
