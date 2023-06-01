@@ -1,11 +1,11 @@
 # scrapeAll
-Overarching pipeline for scraping and cleaning web data
+Overarching pipeline for scraping and cleaning web data. \
 Consists of two part:
 
 **1. Collect raw data from website:**
-  - HTML Table
-  - Image
-  - Pdf (PMOS websites only)
+  - [HTML Table](#html-table)
+  - [Image](#image)
+  - [Pmos Pdf](#pmos-pdf)
 
 
 **2. Clean raw data:**
@@ -13,7 +13,7 @@ Consists of two part:
   - Extract tables from images
 
 ## Collect Raw Data
-### HTML Table
+## HTML Table
 *Required Packages:*
 - [PIL](https://pillow.readthedocs.io/en/stable/)
 - [beautifulsoup4](https://pypi.org/project/beautifulsoup4/)
@@ -35,7 +35,7 @@ Consists of two part:
 ![alt text](Image/url_table.png)
 
 ---
-### Image
+## Image
 *Required Packages:*
 - [PIL](https://pillow.readthedocs.io/en/stable/)
 - [beautifulsoup4](https://pypi.org/project/beautifulsoup4/)
@@ -59,7 +59,7 @@ Consists of two part:
 
 ![alt text](Image/url_image.png)
 ---
-### Pdf (PMOS only)
+## Pmos Pdf
 *Required Packages:*
 - [selenium](https://pypi.org/project/selenium/)
 
