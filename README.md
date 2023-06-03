@@ -1,19 +1,23 @@
 # scrapeAll
-Overarching pipeline for scraping and cleaning web data. \
-Consists of two part:
+An overarching pipeline for scraping and cleaning web data.
 
-**1. Collect raw data from website:**
+## Overview
+The scrapeAll project provides a convenient and modular solution for collecting raw data from websites and cleaning the obtained data. It consists of two main parts: [collecting raw data](#collect-raw-data-from-website) and [cleaning raw data](#clean-raw-data).
+
+## **1. Collect raw data from website:**
   - [HTML Table](#html-table)
   - [Image](#image)
   - [Pmos Pdf](#pmos-pdf)
 
 
 **2. Clean raw data:**
-  - Extract tables from pdf
-  - Extract tables from images
+  - [Extract tables from pdf](#extract-tables-from-pdf)
+  - [Extract tables from images](#extract-tables-from-images)
+
+---
 
 ## Collect Raw Data
-## HTML Table
+- ### HTML Table
 *Required Packages:*
 - [PIL](https://pillow.readthedocs.io/en/stable/)
 - [beautifulsoup4](https://pypi.org/project/beautifulsoup4/)
@@ -27,12 +31,14 @@ Consists of two part:
 
 *Example:*
 [This is a website that contains a table](https://www.cctd.com.cn/show-46-167312-1.html)
-> 1. open command prompt and cd to the folder that contains getRaw.py.
-> 2. ```python getRaw.py data/raw/2017年5月份中国电煤价格指数/```
-> 3. paste ```https://www.cctd.com.cn/show-46-167312-1.html```
-> 4. type ```table```
-
-![alt text](Image/url_table.png)
+```bash
+cd Desktop\scrapeAll\
+python getRaw.py data/raw/2017年5月份中国电煤价格指数/
+Enter the url:
+https://www.cctd.com.cn/show-46-167312-1.html
+table/image/pdf?
+table
+```
 
 ---
 ## Image
