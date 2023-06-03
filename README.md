@@ -2,9 +2,9 @@
 An overarching pipeline for scraping and cleaning web data.
 
 ## Overview
-The scrapeAll project provides a convenient and modular solution for collecting raw data from websites and cleaning the obtained data. It consists of two main parts: [collecting raw data](#collect-raw-data-from-website) and [cleaning raw data](#clean-raw-data).
+The scrapeAll project provides a convenient and modular solution for collecting raw data from websites and cleaning the obtained data. It consists of two main parts: [collecting raw data](#collect-raw-data) and [cleaning raw data](#clean-raw-data).
 
-## **1. Collect raw data from website:**
+**1. Collect raw data from website:**
   - [HTML Table](#html-table)
   - [Image](#image)
   - [Pmos Pdf](#pmos-pdf)
@@ -17,79 +17,75 @@ The scrapeAll project provides a convenient and modular solution for collecting 
 ---
 
 ## Collect Raw Data
-- ### HTML Table
-*Required Packages:*
-- [PIL](https://pillow.readthedocs.io/en/stable/)
-- [beautifulsoup4](https://pypi.org/project/beautifulsoup4/)
+1. ### HTML Table
+    *Required Packages:*
+    - [PIL](https://pillow.readthedocs.io/en/stable/)
+    - [beautifulsoup4](https://pypi.org/project/beautifulsoup4/)
 
-*How to use:*
-> 1. open command prompt and cd to the folder that contains getRaw.py.
-> 2. ```python getRaw.py {the folder that you want to store the image}```
-> 3. paste or type the url
-> 4. type ```table```  
-<br />
+    *How to use:*
+    > 1. open command prompt and cd to the folder that contains getRaw.py.
+    > 2. ```python getRaw.py {the folder that you want to store the image}```
+    > 3. paste or type the url
+    > 4. type ```table```  
+    <br />
 
-*Example:*
-[This is a website that contains a table](https://www.cctd.com.cn/show-46-167312-1.html)
-```bash
-cd Desktop\scrapeAll\
-python getRaw.py data/raw/2017年5月份中国电煤价格指数/
-Enter the url:
-https://www.cctd.com.cn/show-46-167312-1.html
-table/image/pdf?
-table
-```
+    *Example:*
+    [This is a website that contains a table](https://www.cctd.com.cn/show-46-167312-1.html)
+    ```bash
+    cd Desktop\scrapeAll\
+    python getRaw.py data/raw/2017年5月份中国电煤价格指数/
+    Enter the url:
+    https://www.cctd.com.cn/show-46-167312-1.html
+    table/image/pdf?
+    table
+    ```
 
 ---
-## Image
-*Required Packages:*
-- [PIL](https://pillow.readthedocs.io/en/stable/)
-- [beautifulsoup4](https://pypi.org/project/beautifulsoup4/)
+2. ## Image
+    *Required Packages:*
+    - [PIL](https://pillow.readthedocs.io/en/stable/)
+    - [beautifulsoup4](https://pypi.org/project/beautifulsoup4/)
 
-*How to use:*
-> 1. open command prompt and cd to the folder that contains getRaw.py.
-> 2. ```python getRaw.py {the folder that you want to store the image}```
-> 3. paste or type the url
-> 4. type ```image```
-> 5. type the threshold of the size of the image to download. (eg. to download images larger than 25kb type 25000)  
-<br />
+    *How to use:*
+    > 1. open command prompt and cd to the folder that contains getRaw.py.
+    > 2. ```python getRaw.py {the folder that you want to store the image}```
+    > 3. paste or type the url
+    > 4. type ```image```
+    > 5. type the threshold of the size of the image to download. (eg. to download images larger than 25kb type 25000)  
+    <br />
 
-*Example:*
-[This is a website that contains images](https://zhuanlan.zhihu.com/p/124225606)
-> 1. open command prompt and cd to the folder that contains getRaw.py.
-> 2. ```python getRaw.py data/raw/关于2020年2月广东电力市场结算情况的通告/```
-> 3. paste ```https://zhuanlan.zhihu.com/p/124225606```
-> 4. type ```image```
-> 5. type ```25000```
+    *Example:*
+    [This is a website that contains images](https://zhuanlan.zhihu.com/p/124225606)
+    > 1. open command prompt and cd to the folder that contains getRaw.py.
+    > 2. ```python getRaw.py data/raw/关于2020年2月广东电力市场结算情况的通告/```
+    > 3. paste ```https://zhuanlan.zhihu.com/p/124225606```
+    > 4. type ```image```
+    > 5. type ```25000```
 
-
-![alt text](Image/url_image.png)
 ---
-## Pmos Pdf
-*Required Packages:*
-- [selenium](https://pypi.org/project/selenium/)
+3. ## Pmos Pdf
+    *Required Packages:*
+    - [selenium](https://pypi.org/project/selenium/)
 
-*How to use:*
-> 1. open command prompt and cd to the folder that contains getRaw.py.
-> 2. ```python getRaw.py {the folder that you want to store the image}```
-> 3. paste or type the pmos url
-> 4. type ```pdf```
-> 5. type the html class of the pdf element. (press enter to accept default value ```el-table__row```)
-> 6. type the number of page you want to scrape. (press enter to accept default value 1)
-> 7. type the search keyword. (press enter to accept default value None) (by giving a search keyword, you will only download pdf that contains such keyword.)
-<br />
+    *How to use:*
+    > 1. open command prompt and cd to the folder that contains getRaw.py.
+    > 2. ```python getRaw.py {the folder that you want to store the image}```
+    > 3. paste or type the pmos url
+    > 4. type ```pdf```
+    > 5. type the html class of the pdf element. (press enter to accept default value ```el-table__row```)
+    > 6. type the number of page you want to scrape. (press enter to accept default value 1)
+    > 7. type the search keyword. (press enter to accept default value None) (by giving a search keyword, you will only download pdf that contains such keyword.)
+    <br />
 
-*Example:*
-[This is a PMOS website](https://pmos.sd.sgcc.com.cn/pxf-settlement-outnetpub/#/pxf-settlement-outnetpub/columnHomeLeftMenuNew)
-> 1. open command prompt and cd to the folder that contains getRaw.py.
-> 2. ```python getRaw.py data/raw/Shandong_PMOS/```
-> 3. paste ```(https://pmos.sd.sgcc.com.cn/pxf-settlement-outnetpub/#/pxf-settlement-outnetpub/columnHomeLeftMenuNew)```
-> 4. type ```pdf```
-> 5. press enter
-> 6. type 3
-> 7. type 工作日报
-
-![alt text](Image/url_pmos.png)
+    *Example:*
+    [This is a PMOS website](https://pmos.sd.sgcc.com.cn/pxf-settlement-outnetpub/#/pxf-settlement-outnetpub/columnHomeLeftMenuNew)
+    > 1. open command prompt and cd to the folder that contains getRaw.py.
+    > 2. ```python getRaw.py data/raw/Shandong_PMOS/```
+    > 3. paste ```(https://pmos.sd.sgcc.com.cn/pxf-settlement-outnetpub/#/pxf-settlement-outnetpub/columnHomeLeftMenuNew)```
+    > 4. type ```pdf```
+    > 5. press enter
+    > 6. type 3
+    > 7. type 工作日报
 
 <br />
 
@@ -103,32 +99,32 @@ For image extraction:
 - From the above website, download the poppler for your laptop.
 - Go to src/getClean/pdf_to_image.py and change the variable at line 10 to your poppler bin path
 ---
-### Extract Tables from PDF
-*How to use:*
-> 1. open command prompt and cd to the folder that contains getClean.py.
-> 2. ```python getClean.py {the path to the pdf} {the path to the folder that you want to store the table}```
-> Note: if {the path to the folder that you want to store the table} is omitted, then the path to the pdf is used with 'raw' replaced with 'clean'. (eg. if path to the pdf is data/raw/xxxx.pdf then the cleaned table would be stored in data/clean/xxxx/)
-> Note: Images of the pdf would be created and stored in a temporary folder in the same folder as the pdf.
-> 3. type ```pdf```
-<br />
+1. ### Extract Tables from PDF
+    *How to use:*
+    > 1. open command prompt and cd to the folder that contains getClean.py.
+    > 2. ```python getClean.py {the path to the pdf} {the path to the folder that you want to store the table}```
+    > Note: if {the path to the folder that you want to store the table} is omitted, then the path to the pdf is used with 'raw' replaced with 'clean'. (eg. if path to the pdf is data/raw/xxxx.pdf then       the cleaned table would be stored in data/clean/xxxx/)
+    > Note: Images of the pdf would be created and stored in a temporary folder in the same folder as the pdf.
+    > 3. type ```pdf```
+    <br />
 
-*Example:*
-> 1. open command prompt and cd to the folder that contains getClean.py.
-> 2. ```python getClean.py data/raw/Shandong_PMOS/山东电力现货市场2023年4月结算试运行工作日报(4月7日).pdf```
-> 3. type ```pdf```
-> 4. All tables would be stored at data/clean/Shandong_PMOS/山东电力现货市场2023年4月结算试运行工作日报(4月7日)/
+    *Example:*
+    > 1. open command prompt and cd to the folder that contains getClean.py.
+    > 2. ```python getClean.py data/raw/Shandong_PMOS/山东电力现货市场2023年4月结算试运行工作日报(4月7日).pdf```
+    > 3. type ```pdf```
+    > 4. All tables would be stored at data/clean/Shandong_PMOS/山东电力现货市场2023年4月结算试运行工作日报(4月7日)/
 ---
 
-### Extract Tables from Images
-*How to use:*
-> 1. open command prompt and cd to the folder that contains getClean.py.
-> 2. ```python getClean.py {the path to the folder that contains images} {the path to the folder that you want to store the table}```
-> Note: if {the path to the folder that you want to store the table} is omitted, then the path to the pdf is used with 'raw' replaced with 'clean'. (eg. if path to the folder that contains images is data/raw/xxxx/ then the cleaned table would be stored in data/clean/xxxx/)
-> 3. type ```image```
-<br />
+2. ### Extract Tables from Images
+    *How to use:*
+    > 1. open command prompt and cd to the folder that contains getClean.py.
+    > 2. ```python getClean.py {the path to the folder that contains images} {the path to the folder that you want to store the table}```
+    > Note: if {the path to the folder that you want to store the table} is omitted, then the path to the pdf is used with 'raw' replaced with 'clean'. (eg. if path to the folder that contains images is      data/raw/xxxx/ then the cleaned table would be stored in data/clean/xxxx/)
+    > 3. type ```image```
+    <br />
 
-*Example:*
-> 1. open command prompt and cd to the folder that contains getClean.py.
-> 2. ```python getClean.py data/raw/website_images/```
-> 3. type ```image```
-> 4. All tables would be stored at data/clean/website_images/
+    *Example:*
+    > 1. open command prompt and cd to the folder that contains getClean.py.
+    > 2. ```python getClean.py data/raw/website_images/```
+    > 3. type ```image```
+    > 4. All tables would be stored at data/clean/website_images/
