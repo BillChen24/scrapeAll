@@ -28,7 +28,7 @@ The scrapeAll project provides a convenient and modular solution for collecting 
     > 3. paste or type the url
     > 4. type ```table```  
     <br />
-
+    
     *Example:*
     [This is a website that contains a table](https://www.cctd.com.cn/show-46-167312-1.html)
     ```bash
@@ -53,15 +53,19 @@ The scrapeAll project provides a convenient and modular solution for collecting 
     > 4. type ```image```
     > 5. type the threshold of the size of the image to download. (eg. to download images larger than 25kb type 25000)  
     <br />
-
+    
     *Example:*
     [This is a website that contains images](https://zhuanlan.zhihu.com/p/124225606)
-    > 1. open command prompt and cd to the folder that contains getRaw.py.
-    > 2. ```python getRaw.py data/raw/关于2020年2月广东电力市场结算情况的通告/```
-    > 3. paste ```https://zhuanlan.zhihu.com/p/124225606```
-    > 4. type ```image```
-    > 5. type ```25000```
-
+    ```bash
+    cd Desktop\scrapeAll\
+    python getRaw.py data/raw/关于2020年2月广东电力市场结算情况的通告/
+    Enter the url:
+    https://zhuanlan.zhihu.com/p/124225606
+    table/image/pdf?
+    image
+    Enter the image size threshold to download:
+    25000
+    ```
 ---
 3. ## Pmos Pdf
     *Required Packages:*
@@ -79,15 +83,23 @@ The scrapeAll project provides a convenient and modular solution for collecting 
 
     *Example:*
     [This is a PMOS website](https://pmos.sd.sgcc.com.cn/pxf-settlement-outnetpub/#/pxf-settlement-outnetpub/columnHomeLeftMenuNew)
-    > 1. open command prompt and cd to the folder that contains getRaw.py.
-    > 2. ```python getRaw.py data/raw/Shandong_PMOS/```
-    > 3. paste ```(https://pmos.sd.sgcc.com.cn/pxf-settlement-outnetpub/#/pxf-settlement-outnetpub/columnHomeLeftMenuNew)```
-    > 4. type ```pdf```
-    > 5. press enter
-    > 6. type 3
-    > 7. type 工作日报
-
+    ```bash
+    cd Desktop\scrapeAll\
+    python python getRaw.py data/raw/Shandong_PMOS/
+    Enter the url:
+    https://pmos.sd.sgcc.com.cn/pxf-settlement-outnetpub/#/pxf-settlement-outnetpub/columnHomeLeftMenuNew
+    table/image/pdf?
+    pdf
+    Enter the element class (default el-table__row):
+    
+    Enter the number of page to scrape (default 1):
+    2
+    Enter the search keyword (default None):
+    工作日报
+    ```
+    **Note: This script will open a window that scrape each pdf from the PMOS website. It will also create a json file that store the url link of each pdf. The json file will help the script to recognize the pdf information that it has already collected, so that it will avoid re-scraping these pdfs.**
 <br />
+
 
 ## Clean Raw Data
 *Required Packages:*
@@ -109,10 +121,13 @@ For image extraction:
     <br />
 
     *Example:*
-    > 1. open command prompt and cd to the folder that contains getClean.py.
-    > 2. ```python getClean.py data/raw/Shandong_PMOS/山东电力现货市场2023年4月结算试运行工作日报(4月7日).pdf```
-    > 3. type ```pdf```
-    > 4. All tables would be stored at data/clean/Shandong_PMOS/山东电力现货市场2023年4月结算试运行工作日报(4月7日)/
+    ```bash
+    cd Desktop\scrapeAll\
+    python getClean.py data/raw/山东工作日报.pdf data/clean/山东工作日报/
+    What type of data? image/pdf/table
+    pdf
+    ```
+    **Note: If you want to convert a folder of pdfs, simply put the folder path as the input path. (eg. python getClean.py data/folder_with_multiple_pdfs/ data/folder_to_store_clean_table)**
 ---
 
 2. ### Extract Tables from Images
@@ -124,7 +139,10 @@ For image extraction:
     <br />
 
     *Example:*
-    > 1. open command prompt and cd to the folder that contains getClean.py.
-    > 2. ```python getClean.py data/raw/website_images/```
-    > 3. type ```image```
-    > 4. All tables would be stored at data/clean/website_images/
+    ```bash
+    cd Desktop\scrapeAll\
+    python getClean.py data/raw/website_image data/clean/website_table/
+    What type of data? image/pdf/table
+    image
+    ```
+
