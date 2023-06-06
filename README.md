@@ -36,7 +36,7 @@ The scrapeAll project provides a convenient and modular solution for collecting 
     python getRaw.py data/raw/2017年5月份中国电煤价格指数/
     Enter the url:
     https://www.cctd.com.cn/show-46-167312-1.html
-    table/image/pdf?
+    table/image/pdf/pmos?
     table
     ```
 
@@ -61,9 +61,9 @@ The scrapeAll project provides a convenient and modular solution for collecting 
     python getRaw.py data/raw/关于2020年2月广东电力市场结算情况的通告/
     Enter the url:
     https://zhuanlan.zhihu.com/p/124225606
-    table/image/pdf?
+    table/image/pdf/pmos?
     image
-    Enter the image size threshold to download:
+    Enter the minimum image size (in bytes) (press enter to accept default value: 15000 bytes):
     25000
     ```
 ---
@@ -75,7 +75,7 @@ The scrapeAll project provides a convenient and modular solution for collecting 
     > 1. open command prompt and cd to the folder that contains getRaw.py.
     > 2. ```python getRaw.py {the folder that you want to store the image}```
     > 3. paste or type the pmos url
-    > 4. type ```pdf```
+    > 4. type ```pmos```
     > 5. type the html class of the pdf element. (press enter to accept default value ```el-table__row```)
     > 6. type the number of page you want to scrape. (press enter to accept default value 1)
     > 7. type the search keyword. (press enter to accept default value None) (by giving a search keyword, you will only download pdf that contains such keyword.)
@@ -88,13 +88,13 @@ The scrapeAll project provides a convenient and modular solution for collecting 
     python python getRaw.py data/raw/Shandong_PMOS/
     Enter the url:
     https://pmos.sd.sgcc.com.cn/pxf-settlement-outnetpub/#/pxf-settlement-outnetpub/columnHomeLeftMenuNew
-    table/image/pdf?
-    pdf
-    Enter the element class (default el-table__row):
+    table/image/pdf/pmos?
+    pmos
+    Enter the element class (press enter to accept default value: el-table__row):
     
-    Enter the number of page to scrape (default 1):
+    Enter the number of page to scrape (press enter to accept default value: 1):
     2
-    Enter the search keyword (default None):
+    Enter the search keyword (press enter to accept default value: None)
     工作日报
     ```
     **Note: This script will open a window that scrape each pdf from the PMOS website. It will also create a json file that store the url link of each pdf. The json file will help the script to recognize the pdf information that it has already collected, so that it will avoid re-scraping these pdfs.**
