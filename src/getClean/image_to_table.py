@@ -28,18 +28,33 @@ def get_file_content(filePath):
         return fp.read()
 
 def read_image_to_xls(filepath, newfile_name, outputpath):
-    result = client.tableRecognition(
-    get_file_content(filepath),
-        {
-            'result_type': 'excel',
-        },
-    )
-    #print(filepath)
-    #print(result)
-    result_url = result['result']['result_data']
-    excel_file = requests.get(result_url, allow_redirects=True)
+    # try converting for three max attempts
+    max_attempt = 3
+    attempts = 0
+    success = False
 
-    open(os.path.join(outputpath, newfile_name) , 'wb').write(excel_file.content)
+    while attempts < max_attempt and not success:
+        try:
+            result = client.tableRecognition(
+            get_file_content(filepath),
+                {
+                    'result_type': 'excel',
+                },
+                )
+
+            result_url = result['result']['result_data']
+            if result_url == '':
+                print('result url not exist')
+                break
+            excel_file = requests.get(result_url, allow_redirects=True)
+
+            open(os.path.join(outputpath, newfile_name) , 'wb').write(excel_file.content)
+            success = True
+        except Exception as e:
+            print(filepath + ' cannot convert:', str(e))
+            print(result_url)
+            attempts += 1
+
 
 
 def convert_all_images(inputpath, outputpath=None):
@@ -50,6 +65,10 @@ def convert_all_images(inputpath, outputpath=None):
     for filename in os.listdir(inputpath):
         if filename.endswith(".jpg") or filename.endswith(".png"):
             completeName = os.path.join(inputpath, filename)
-            read_image_to_xls(completeName, filename[:-4]+'.xls', outputpath)
+            try:
+                read_image_to_xls(completeName, filename[:-4]+'.xls', outputpath)
+            except:
+                print(filename + ' failed to convert to tables.')
+                continue
             time.sleep(3)
     print('Temporary tables successfully saved at ' + outputpath)

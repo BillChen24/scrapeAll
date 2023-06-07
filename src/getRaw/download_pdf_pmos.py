@@ -113,7 +113,7 @@ def save_pdf_dict(pdf_dict, pdf_dict_file, output_path):
         pdf_dict_file = 'pdf_link.json'
     pdf_dict_file = os.path.join(output_path, pdf_dict_file)
     with open(pdf_dict_file, 'w', encoding='utf8') as f:
-        json.dump(pdf_dict, f, ensure_ascii=False)
+        json.dump(pdf_dict, f, ensure_ascii=False, indent = 4)
 
 
 def get_pdf_links_more_pages(url, element_class=pmos_element_class, driver=None, page_num=1, search_word=None, pdf_dict_file=None, output_path = None):
@@ -135,7 +135,7 @@ def save_pdf(pdf_dict_file = 'pdf_link.json', folder_path = None):
 
     dir_list = os.listdir(folder_path)
     for k, v in pdf_dict.items():
-        if k in dir_list:
+        if k+'.pdf' in dir_list:
             continue
         if v is None:
             continue

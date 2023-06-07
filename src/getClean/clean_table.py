@@ -23,8 +23,11 @@ def get_tables_from_excels(table_path):
     row_key = None
     for file in file_ls:
         if file.endswith('xls'):
-            df = pd.read_excel(table_path+file, header=None)
-            result = get_table_from_excel(df, result)
+            try:
+                df = pd.read_excel(os.path.join(table_path,file), header=None)
+                result = get_table_from_excel(df, result)
+            except:
+                continue
     return result
 
 def isTitle(arr):
@@ -54,9 +57,13 @@ def split_tables(array):
         tables.append(pd.DataFrame(array[title_index[i]:title_index[i+1]]))
     return tables
 
-def store_clean(tables, outpath):
+def store_clean(tables, outpath, table_name = 'table'):
     if not os.path.exists(outpath):
         os.makedirs(outpath)
     for i, table in enumerate(tables):
-        table.to_excel(os.path.join(outpath, f'table_{i}.xlsx'))
-    print('Cleaned tables successfully saved at ' + outpath)
+        if table is None:
+            continue
+        if isinstance(table, int):
+            print(table)
+        table.to_excel(os.path.join(outpath, f'{table_name}_{i+1}.xlsx'))
+        print(f'Cleaned table {table_name}_{i+1} successfully saved at ' + outpath)
