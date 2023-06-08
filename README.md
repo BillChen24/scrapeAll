@@ -4,7 +4,8 @@ An overarching pipeline for scraping and cleaning web data.
 ## Overview
 The scrapeAll project provides a convenient and modular solution for collecting raw data from websites and cleaning the obtained data. It consists of two main parts: [collecting raw data](#collect-raw-data) and [cleaning raw data](#clean-raw-data).
 
-**1. Collect raw data from website:**
+**1. Collect raw data from website/multiple urls:**
+  - [Urls](#urls)
   - [HTML Table](#html-table)
   - [Image](#image)
   - [Pmos Pdf](#pmos-pdf)
@@ -17,7 +18,33 @@ The scrapeAll project provides a convenient and modular solution for collecting 
 ---
 
 ## Collect Raw Data
-1. ### HTML Table
+1. ### Urls
+    *Required Packages:*
+    - [selenium](https://pypi.org/project/selenium/)
+    - [beautifulsoup4](https://pypi.org/project/beautifulsoup4/)
+    
+    *Example of how to use:*
+    [This is a website that contains multiple urls](https://www.cctd.com.cn/list-46-1.html)
+    ```bash
+    cd Desktop\scrapeAll\
+    python getRaw.py data/中国电煤价格指数/raw/2016/
+    Enter the url or the path to the json file that contains multiple urls:
+    https://www.cctd.com.cn/list-46-1.html
+    urls/table/image/pmos_pdf?
+    urls
+    Enter the class of the div that contains the urls:
+    new_list
+    Enter the search keyword (press enter to accept default value: None):
+    2016
+    Enter the XPATH of the next-page-button (press enter if not applicable):
+    //*[@id="pages"]/a[5]
+    Enter the number of page to scrape (press enter to accept default value: 1):
+    3
+    ```
+
+---
+
+2. ### HTML Table
     *Required Packages:*
     - [PIL](https://pillow.readthedocs.io/en/stable/)
     - [beautifulsoup4](https://pypi.org/project/beautifulsoup4/)
@@ -34,14 +61,14 @@ The scrapeAll project provides a convenient and modular solution for collecting 
     ```bash
     cd Desktop\scrapeAll\
     python getRaw.py data/raw/2017年5月份中国电煤价格指数/
-    Enter the url:
+    Enter the url or the path to the json file that contains multiple urls:
     https://www.cctd.com.cn/show-46-167312-1.html
     table/image/pdf/pmos?
     table
     ```
 
 ---
-2. ## Image
+3. ## Image
     *Required Packages:*
     - [PIL](https://pillow.readthedocs.io/en/stable/)
     - [beautifulsoup4](https://pypi.org/project/beautifulsoup4/)
@@ -59,7 +86,7 @@ The scrapeAll project provides a convenient and modular solution for collecting 
     ```bash
     cd Desktop\scrapeAll\
     python getRaw.py data/raw/关于2020年2月广东电力市场结算情况的通告/
-    Enter the url:
+    Enter the url or the path to the json file that contains multiple urls:
     https://zhuanlan.zhihu.com/p/124225606
     table/image/pdf/pmos?
     image
@@ -67,7 +94,7 @@ The scrapeAll project provides a convenient and modular solution for collecting 
     25000
     ```
 ---
-3. ## Pmos Pdf
+4. ## Pmos Pdf
     *Required Packages:*
     - [selenium](https://pypi.org/project/selenium/)
 
@@ -86,7 +113,7 @@ The scrapeAll project provides a convenient and modular solution for collecting 
     ```bash
     cd Desktop\scrapeAll\
     python python getRaw.py data/raw/Shandong_PMOS/
-    Enter the url:
+    Enter the url or the path to the json file that contains multiple urls:
     https://pmos.sd.sgcc.com.cn/pxf-settlement-outnetpub/#/pxf-settlement-outnetpub/columnHomeLeftMenuNew
     table/image/pdf/pmos?
     pmos
