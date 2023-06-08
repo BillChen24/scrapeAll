@@ -4,6 +4,13 @@ import os
 import pandas as pd
 import urllib
 from PIL import ImageFile
+import requests
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.common.exceptions import WebDriverException
+import json
 
 # def getImageSize(url):
 #     """
@@ -55,6 +62,12 @@ from PIL import ImageFile
 #     print('Images successfully saved at ' + output_path)
 
 def scrape_urls(url=None, div_class=None, keyword=None, urls_dict=None, page_num=1, next_page_xpath=None):
+    if keyword == '':
+        keyword = None
+    if next_page_xpath == '':
+        next_page_xpath = None
+    if page_num == '':
+        page_num = 1
     if urls_dict is None:
         urls_dict = {}
     driver = webdriver.Chrome()
@@ -99,7 +112,6 @@ def store_urls_as_json(urls_dict, output_file):
     if not os.path.isabs(output_file):
         # If it's not a full path, join it with the current working directory
         output_file = os.path.abspath(os.path.join(os.getcwd(), output_file))
-        print(output_file)
 
     # Check if the output_file is a directory
     if os.path.isdir(output_file):
@@ -111,8 +123,8 @@ def store_urls_as_json(urls_dict, output_file):
     os.makedirs(output_dir, exist_ok=True)
 
     try:
-        with open(output_file, 'w') as file:
-            json.dump(urls_dict, file, indent=4)
+        with open(output_file, 'w', encoding = 'utf-8') as file:
+            json.dump(urls_dict, file, indent=4, ensure_ascii = False)
         print(f"URLs stored as JSON in file: {output_file}")
     except IOError as e:
         print(f"Error occurred while writing to file: {output_file}")

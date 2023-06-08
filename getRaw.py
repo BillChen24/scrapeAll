@@ -37,6 +37,10 @@ def main():
         next_page_xpath = input('Enter the XPATH of the next-page-button (press enter if not applicable): \n')
         if next_page_xpath != '':
             page_num = input('Enter the number of page to scrape (press enter to accept default value: 1):\n')
+        else:
+            page_num = 1
+        urls_dict = scrape_urls(url=url, div_class=div_class, keyword=keyword, page_num=int(page_num), next_page_xpath=next_page_xpath)
+        store_urls_as_json(urls_dict, output_path)
 
 
     if data_type == "table":
@@ -74,12 +78,17 @@ def main():
             download_images(url, output_path, size_threshold, image_format = image_format) #download only images with size larger than 15kb
 
     if data_type == "pdf":
-        save_pdf(pdf_dict_file = url, folder_path = output_path)
+        if os.path.exists(url):
+            save_pdf(pdf_dict_file = url, folder_path = output_path)
+        else:
+            pdf = requests.get(url, verify = False).content
+            with open(output_path, 'wb') as file:
+                file.write(pdf)
+                print('save at '+ output_path)
 
 
 
     if data_type == "pmos_pdf":
-        url = input('Enter the pmos url:\n')
         element_class = input('Enter the element class (press enter to accept default value: el-table__row):\n')
         if element_class == '':
             element_class = pmos_element_class
