@@ -169,7 +169,6 @@ def download_images(url, output_path, size_threshold = 15000, name = 'image', im
                 #with open(image_filename, 'wb') as handler:
                 #    handler.write(img_data)
                 urllib.request.urlretrieve(image_url, os.path.join(output_path, image_filename))
-                print(image_url)
                 print('Images successfully saved at ' + output_path)
             i += 1
 

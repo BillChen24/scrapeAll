@@ -10,6 +10,11 @@ import time
 import os
 import json
 import base64
+import warnings
+
+
+# Settings the warnings to be ignored
+warnings.filterwarnings('ignore')
 
 pmos_element_class = 'el-table__row'
 

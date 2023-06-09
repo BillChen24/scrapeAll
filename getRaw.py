@@ -3,6 +3,11 @@ from src.getRaw.download_pdf_pmos import *
 import sys
 import os
 import pandas as pd
+import warnings
+
+
+# Settings the warnings to be ignored
+warnings.filterwarnings('ignore')
 
 pmos_element_class = 'el-table__row'
 

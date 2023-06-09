@@ -7,6 +7,11 @@ from src.getClean.image_to_text import *
 from src.getClean.image_to_table import *
 from src.getClean.pdf_to_image import *
 from src.getClean.clean_table import *
+import warnings
+
+
+# Settings the warnings to be ignored
+warnings.filterwarnings('ignore')
 
 def main():
     """

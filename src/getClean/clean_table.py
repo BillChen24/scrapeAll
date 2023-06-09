@@ -64,6 +64,7 @@ def store_clean(tables, outpath, table_name = 'table'):
         if table is None:
             continue
         if isinstance(table, int):
-            print(table)
+            continue
+
         table.to_excel(os.path.join(outpath, f'{table_name}_{i+1}.xlsx'))
         print(f'Cleaned table {table_name}_{i+1} successfully saved at ' + outpath)
