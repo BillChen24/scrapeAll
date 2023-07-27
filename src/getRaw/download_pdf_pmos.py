@@ -6,6 +6,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import WebDriverException
+from selenium.webdriver.chrome.options import Options
 import time
 import os
 import json
@@ -16,11 +17,16 @@ import warnings
 # Settings the warnings to be ignored
 warnings.filterwarnings('ignore')
 
+# this parameter tells Chrome that
+# it should be run without UI (Headless)
+options = Options()
+options.headless = True
+
 pmos_element_class = 'el-table__row'
 
 def get_pdf_links_one_page(url, element_class=pmos_element_class, driver=None, button_xpath=None, pdf_dict={}, search_word=None, pdf_dict_file='pdf_link.json', output_path = None):
     if driver is None:
-        driver = webdriver.Chrome()
+        driver = webdriver.Chrome(options = options)
 
     if not driver.current_url == url:
         print(url)
